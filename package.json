@@ -1,0 +1,23 @@
+{
+  "name": "puffelement",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "jshint": "^2.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thoddi/puffElement.git"
+  },
+  "author": "Þorvarður Bergmann Kjartansson",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/thoddi/puffElement/issues"
+  },
+  "homepage": "https://github.com/thoddi/puffElement#readme"
+}
