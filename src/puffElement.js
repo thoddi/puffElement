@@ -88,6 +88,21 @@ class PuffElement {
 			else{
 				this._setAttribute(key, value);
 			}
+
+			return new Proxy(this, {
+				set(target, p, value, receiver) {
+					if(!Object.keys(target).includes(p)){
+						target.element[p] = value;
+					}
+					return Reflect.set(...arguments);
+				},
+				get(target, p, receiver){
+					if(!Object.keys(target).includes(p)){
+						return target.element[p];
+					}
+					return Reflect.get(...arguments);
+				}
+			})
 		}
 	}
 
