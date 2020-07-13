@@ -1,12 +1,14 @@
-#PuffElement
+PuffElement
+===========
 
 PuffElement is a JavaScript library to simply create complex DOM elements, using JSON. This library is in semi-experemental stages so features may change.
 
-For now, the only way to use the library is by downloading the zip and plazing it in your own project. The code containes some cutting edge EcmaScript features, so you might have to transpile it yourself, depending on the project you are working on.
+For now, the only way to use the library is by downloading the zip and placing it in your own project. The code containes some cutting edge EcmaScript features, so you might have to transpile it yourself to an older standards like ES5 or ES6, depending on the project you are working on.
 
 For issues or sugestions, feel free to send me an issue [here](https://github.com/thoddi/puffElement/issues).
 
-##How to use
+How to use
+----------
 
 There are two ways to use PuffElement. One way is to create an instance of PuffElement with `new PuffElement()`. The result is an object with two properties:
 * element (the HTMLElement that was created)
@@ -20,8 +22,8 @@ let el = PuffElement.createElement();
 
 ### Defining an element
 
-PuffElement takes a single parameter, either a string or a JSON-style object (JavaScript object). If a string is passed, a textNode will be created. 
-If an object is passed, it's properties will be the attributes of the created element. So the property names should be written the same way as the attribute names of the element. If the attribute name will have a dash in it the property key should have a underscore in it's place.
+PuffElement takes a single parameter, either a string or a JSON object (JavaScript object). If a string is passed, a textNode will be created. 
+If an object is passed, it's properties will be the attributes of the created element. So the property names should be written the same way as the attribute names of the element. If the attribute name will have a dash in it, the property key should have a underscore in it's place.
 ```
 PuffElement.createElement({ data_id: "el1"})
 
@@ -106,7 +108,7 @@ el.addEventListener("click", () => alert("click!"));
 
 #### propertyName
 
-You can use the `propertyName` property to mark the a child element as something you would like to have easy access to later. The element will have the `data-puff-property-name` attribute and a reference to that HTMLElement will be added to the `properties` object of the parent PuffElement.
+You can use the `propertyName` property to mark a child element as something you would like to have easy access to later. The element will have the `data-puff-property-name` attribute and a reference to that HTMLElement will be added to the `properties` object of the parent PuffElement.
 
 ```
 let el = new PuffElement({ 
@@ -139,3 +141,6 @@ grandChild.className = "changedChild";
 ```
 
 This feature works as described but is in an experimental phase and might change in the future.
+
+
+In it's current implementation, if you create a PuffElement using the `new` operator, you will have to use it's `element` property when you add it to the DOM or need to manipulate in in any way.
