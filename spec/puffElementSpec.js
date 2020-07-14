@@ -134,4 +134,45 @@ describe("PuffElement", () => {
         expect(el.properties.middleDiv.element.className).toBe("bb");
         expect(el.element.querySelector(".cc")).not.toBe(null);
     });
+
+    it("Should get all PuffElement property", () => {
+        let el = new puff({
+            class: "a",
+            children: {
+                class: "b",
+                propertyName: "middleDiv",
+                children: {
+                    class: "c",
+                    propertyName: "centerDiv"
+                }
+            }
+        });
+
+        expect(Object.keys(el.properties).length).toBe(2);
+    });
+
+    it("Should get a HTMLElement property", () => {
+        let el = new puff({class: "class1"});
+
+        expect(el.className).toBe("class1");
+    });
+
+    it("Should set a HTMLElement property", () => {
+        let el = new puff({class: "class1"});
+
+        el.className = "class2";
+
+        expect(el.className).toBe("class2");
+    });
+
+    it("Should call a HTMLElement method", () => {
+        let el = new puff({
+            children: {
+                id: "id1",
+                class: "class1"
+            }
+        });
+
+        expect(el.querySelector("#id1").className).toBe("class1");
+    });
 });
