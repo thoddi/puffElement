@@ -87,23 +87,39 @@ class PuffElement {
 			// it's an attribute and will be added as such
 			else{
 				this._setAttribute(key, value);
-			}
+			}			
+		}
 
-			return new Proxy(this, {
-				set(target, p, value, receiver) {
-					if(!Object.keys(target).includes(p)){
-						target.element[p] = value;
-					}
-					return Reflect.set(...arguments);
-				},
-				get(target, p, receiver){
-					if(!Object.keys(target).includes(p)){
-						return target.element[p];
-					}
+		// We return a proxy so all HTMLElement porperties and methods can be used straight from the PuffElement.
+		return new Proxy(this, {
+			set: function (target, p, value, receiver) {
+				// If requested property isn't defined, asume it exists in the element.
+				if(target[p] === undefined){
+					target.element[p] = value;
+					return true;
+				}
+				return Reflect.set(...arguments);
+			},
+			get: function (target, p, receiver){
+				// Return requested property if it's defined in PuffElement.
+				if(target[p] !== undefined){
 					return Reflect.get(...arguments);
 				}
-			})
-		}
+
+				// Get the property from the element.
+				const origProp = target._element[p];
+
+				// Return value if property is not a function.
+				if(typeof origProp !== "function")
+					return origProp;
+
+				// Call the element method.
+				return function (...args) {
+					let result = origProp.apply(target._element, args);
+					return result;
+				};
+			}
+		});
 	}
 
 	/**

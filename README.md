@@ -13,12 +13,25 @@ How to use
 There are two ways to use PuffElement. One way is to create an instance of PuffElement with `new PuffElement()`. The result is an object with two properties:
 * element (the HTMLElement that was created)
 * properties (an object containing shortcuts all child elements with the `propertyName` attribute.)
+The constructor returns a Proxy that redirects all parameter and method calls to the `element` parameter. So you can manipulate the PuffElement as if you are manipulating a HTMLElement. The one exception is when adding it to DOM. Then you have to use the `element` property.
+```
+let el = new PuffElement();
+
+// These lines do the same thing.
+el.element.className = "class1";
+el.className = "class1";
+
+// Here you have to use the 'element' property.
+document.body.append(el.element);
+```
 
 The other way is to use the static method `PuffElement.createElement()`. The result is a pure HTMLElement. So these two methods are equivalent:
 ```
 let el = new PuffElement().element;
 let el = PuffElement.createElement();
 ```
+
+If you create a PuffElement using the `new` operator, you will have to use it's `element` property when you add it to the DOM
 
 ### Defining an element
 
@@ -122,7 +135,7 @@ let el = new PuffElement({
     }
 });
 
-el.properties.grandChild.element.className = "changedChild";
+el.properties.grandChild.className = "changedChild";
 
 // is equivalent to:
 
@@ -139,8 +152,3 @@ child.appendChild(grandChild);
 
 grandChild.className = "changedChild";
 ```
-
-This feature works as described but is in an experimental phase and might change in the future.
-
-
-In it's current implementation, if you create a PuffElement using the `new` operator, you will have to use it's `element` property when you add it to the DOM or need to manipulate in in any way.
