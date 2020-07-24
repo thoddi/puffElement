@@ -1,7 +1,7 @@
 PuffElement
 ===========
 
-PuffElement is a JavaScript library to simply create complex DOM elements, using JSON. This library is in semi-experemental stages so features may change.
+PuffElement is a JavaScript library to simply create complex DOM elements, using JSON.
 
 For now, the only way to use the library is by downloading the zip and placing it in your own project. The code containes some cutting edge EcmaScript features, so you might have to transpile it yourself to an older standards like ES5 or ES6, depending on the project you are working on.
 
